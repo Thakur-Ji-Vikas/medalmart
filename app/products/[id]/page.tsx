@@ -1,9 +1,77 @@
-export default function ProductDetailsPage() {
+// type Props = {
+//   params: {
+//     id: string;
+//   };
+// };
+
+// export default function ProductDetails({ params }: Props) {
+//   return (
+//     <main className="max-w-5xl mx-auto px-6 py-12">
+//       <h1 className="text-4xl font-bold">
+//         Product #{params.id}
+//       </h1>
+
+//       <p className="mt-4 text-gray-600">
+//         This is the product details page.
+//       </p>
+//     </main>
+//   );
+// }
+
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { products } from "@/data/products";
+
+type Props = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export default async function ProductDetails({ params }: Props) {
+  const { id } = await params;
+
+  const product = products.find(
+    (item) => item.id === Number(id)
+  );
+
+  if (!product) {
+    notFound();
+  }
+
   return (
-    <div className="container mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold">
-        Product Details
-      </h1>
-    </div>
+    <main className="max-w-6xl mx-auto px-6 py-12">
+      <div className="grid md:grid-cols-2 gap-12">
+
+        <div className="bg-white rounded-2xl shadow p-8 flex justify-center">
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={450}
+            height={450}
+            className="object-contain"
+          />
+        </div>
+
+        <div>
+          <h1 className="text-4xl font-bold">
+            {product.name}
+          </h1>
+
+          <p className="mt-4 text-amber-600 text-3xl font-bold">
+            ₹{product.price}
+          </p>
+
+          <p className="mt-6 text-gray-600 leading-8">
+            {product.description}
+          </p>
+
+          <button className="mt-10 bg-amber-600 hover:bg-amber-700 text-white px-10 py-4 rounded-xl font-semibold">
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
+    </main>
   );
 }

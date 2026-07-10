@@ -1,7 +1,13 @@
+import ProductHeader from "@/components/products/ProductHeader";
+import FilterBar from "@/components/products/FilterBar";
+import ProductGrid from "@/components/products/ProductGrid";
+
 export default function ProductsPage() {
   return (
-    <div className="container mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold">All Products</h1>
-    </div>
+    <main className="container mx-auto px-6 py-10">
+      <ProductHeader />
+      <FilterBar />
+      <ProductGrid />
+    </main>
   );
 }

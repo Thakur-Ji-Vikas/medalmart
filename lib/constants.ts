@@ -13,6 +13,10 @@ export const NAV_LINKS = [
     href: "/",
   },
   {
+    name: "Products",
+    href: "/products",
+  },
+  {
     name: "Categories",
     href: "/categories",
   },

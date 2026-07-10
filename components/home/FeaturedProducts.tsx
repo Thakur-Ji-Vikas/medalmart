@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 const products = [
@@ -38,12 +39,22 @@ export default function FeaturedProducts() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-          {products.map((product) => (
+          {/* {products.map((product) => (
 
             <div
               key={product.id}
               className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
-            >
+            > */} 
+            {/* replace the above command with this below one */}
+            {products.map((product) => (
+
+  <Link
+    key={product.id}
+    href={`/products/${product.id}`}
+  >
+    <div className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+
 
               <div className="flex h-72 items-center justify-center bg-white">
 
@@ -76,6 +87,7 @@ export default function FeaturedProducts() {
               </div>
 
             </div>
+            </Link>
 
           ))}
 
