@@ -5,10 +5,13 @@ import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
 import { Search, ShoppingCart, User, Trophy } from "lucide-react";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Navbar() {
   // const cart = [];
   const { cart } = useCart();
+
+  const { user } = useAuth();
 
   // Get wishlist items
   const { wishlist } = useWishlist();
@@ -57,9 +60,24 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <button>
+          {/* <button>
             <User className="hover:text-amber-500" />
-          </button>
+          </button> */}
+
+          <Link href={user ? "/profile" : "/login"}>
+
+            {/* <User className="hover:text-amber-500" /> */}
+            
+            <div className="flex items-center gap-2">
+              <User className="hover:text-amber-500" />
+
+              {user && (
+                <span className="hidden text-sm font-medium md:block">
+                  {user.name}
+                </span>
+              )}
+            </div>
+          </Link>
 
           {/* <button>
             <ShoppingCart className="hover:text-amber-500" />

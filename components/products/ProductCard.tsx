@@ -4,29 +4,23 @@ import { useWishlist } from "@/hooks/useWishlist";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/hooks/useCart";
-import { products } from "@/data/products";
+import { Product } from "@/types/product";
+import Button from "@/components/ui/Button";
 
 type ProductCardProps = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+  product: Product;
 };
 
-export default function ProductCard({
-  id,
-  name,
-  price,
-  image,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  // Extract values from the product object
+  const { id, name, price, image } = product;
+
   const { addToCart } = useCart();
 
   // Wishlist functions
   const { addToWishlist, removeFromWishlist, isWishlisted } = useWishlist();
 
   const wishlisted = isWishlisted(id);
-
-  const product = products.find((p) => p.id === id);
 
   return (
     <div className="rounded-2xl border shadow-sm overflow-hidden hover:shadow-lg transition">
@@ -68,12 +62,15 @@ export default function ProductCard({
 
         <p className="mt-3 text-2xl font-bold text-amber-600">₹{price}</p>
 
-        <button
+        {/* <button
           onClick={() => product && addToCart(product)}
           className="mt-6 w-full rounded-xl bg-amber-600 py-3 text-white font-semibold hover:bg-amber-700"
         >
           Add to Cart
-        </button>
+        </button> */}
+        <Button onClick={() => addToCart(product)} className="mt-6 w-full">
+          Add to Cart
+        </Button>
       </div>
     </div>
   );

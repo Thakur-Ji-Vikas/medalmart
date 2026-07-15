@@ -1,26 +1,13 @@
-import Link from "next/link";
+"use client";
 import Image from "next/image";
+import Link from "next/link";
 
-const products = [
-  {
-    id: 1,
-    name: "Premium Gold Trophy",
-    price: "₹899",
-    image: "/images/hero/trophy.webp",
-  },
-  {
-    id: 2,
-    name: "Champion Medal",
-    price: "₹149",
-    image: "/images/hero/medal.webp",
-  },
-  {
-    id: 3,
-    name: "Wooden Award Shield",
-    price: "₹699",
-    image: "/images/hero/award.webp",
-  },
-];
+import { products } from "@/data/products";
+
+// Show only products marked as featured
+const featuredProducts = products.filter(
+  (product) => product.featured
+);
 
 export default function FeaturedProducts() {
   return (
@@ -46,14 +33,14 @@ export default function FeaturedProducts() {
               className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
             > */} 
             {/* replace the above command with this below one */}
-            {products.map((product) => (
+            {featuredProducts.map((product) => (
 
   <Link
     key={product.id}
-    href={`/products/${product.id}`}
-  >
+    href={`/products/${product.id}`} 
+    >
     <div className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
+     
 
 
               <div className="flex h-72 items-center justify-center bg-white">
@@ -79,6 +66,12 @@ export default function FeaturedProducts() {
                 </p>
 
                 <button
+                onClick={(e) => {
+                  // Prevent the parent Link from navigating
+                  e.preventDefault();
+
+                  // We'll connect this to CartContext next. 
+                }}
                   className="mt-6 w-full rounded-xl bg-yellow-600 py-3 font-semibold text-white transition hover:bg-yellow-700"
                 >
                   Add to Cart

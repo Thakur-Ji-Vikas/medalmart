@@ -13,9 +13,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           No products found.
         </h2>
 
-        <p className="mt-2 text-gray-400">
-          Try another search or category.
-        </p>
+        <p className="mt-2 text-gray-400">Try another search or category.</p>
       </div>
     );
   }
@@ -23,24 +21,11 @@ export default function ProductGrid({ products }: ProductGridProps) {
   return (
     <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          price={product.price}
-          image={product.image}
-        />
+        <ProductCard key={product.id} product={product} />
       ))}
     </section>
   );
 }
-
-
-
-
-
-
-
 
 // import ProductCard from "./ProductCard";
 // import { products } from "@/data/products";
