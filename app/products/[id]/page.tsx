@@ -21,6 +21,10 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
+import ReviewList from "@/components/reviews/ReviewList";
+import ReviewForm from "@/components/reviews/ReviewForm";
+import RatingStars from "@/components/reviews/RatingStars";
+import Button from "@/components/ui/Button";
 
 type Props = {
   params: Promise<{
@@ -31,18 +35,23 @@ type Props = {
 export default async function ProductDetails({ params }: Props) {
   const { id } = await params;
 
-  const product = products.find(
-    (item) => item.id === Number(id)
-  );
+  const product = products.find((item) => item.id === Number(id));
 
   if (!product) {
     notFound();
   }
 
+  const totalReviews = product.reviews.length;
+
+  const averageRating =
+    totalReviews === 0
+      ? 0
+      : product.reviews.reduce((sum, review) => sum + review.rating, 0) /
+        totalReviews;
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
       <div className="grid md:grid-cols-2 gap-12">
-
         <div className="bg-white rounded-2xl shadow p-8 flex justify-center">
           <Image
             src={product.image}
@@ -54,24 +63,29 @@ export default async function ProductDetails({ params }: Props) {
         </div>
 
         <div>
-          <h1 className="text-4xl font-bold">
-            {product.name}
-          </h1>
+          <h1 className="text-4xl font-bold">{product.name}</h1>
 
           <p className="mt-4 text-amber-600 text-3xl font-bold">
             ₹{product.price}
           </p>
+          <div className="mt-4 flex items-center gap-3">
+            <RatingStars rating={Math.round(averageRating)} />
 
-          <p className="mt-6 text-gray-600 leading-8">
-            {product.description}
-          </p>
+            <span className="text-gray-600">({totalReviews} reviews)</span>
+          </div>
+          <p className="mt-6 text-gray-600 leading-8">{product.description}</p>
 
-          <button className="mt-10 bg-amber-600 hover:bg-amber-700 text-white px-10 py-4 rounded-xl font-semibold">
-            Add to Cart
-          </button>
+          <Button className="mt-10">Add to Cart</Button>
         </div>
-
       </div>
+
+      <section className="mt-20">
+        <h2 className="mb-8 text-3xl font-bold">Customer Reviews</h2>
+
+        <ReviewList reviews={product.reviews} />
+
+        <ReviewForm />
+      </section>
     </main>
   );
 }
