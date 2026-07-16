@@ -18,7 +18,8 @@
 //   );
 // }
 
-import Image from "next/image";
+// import Image from "next/image";
+import ProductGallery from "@/components/products/ProductGallery";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 import ReviewList from "@/components/reviews/ReviewList";
@@ -52,15 +53,8 @@ export default async function ProductDetails({ params }: Props) {
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
       <div className="grid md:grid-cols-2 gap-12">
-        <div className="bg-white rounded-2xl shadow p-8 flex justify-center">
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={450}
-            height={450}
-            className="object-contain"
-          />
-        </div>
+        
+        <ProductGallery images={product.images} productName={product.name} />
 
         <div>
           <h1 className="text-4xl font-bold">{product.name}</h1>

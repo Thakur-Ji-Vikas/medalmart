@@ -7,7 +7,7 @@ export const products: Product[] = [
     price: 899,
     category: "Trophies",
     image: "/images/hero/trophy.webp",
-    images: ["/images/hero/trophy.webp"],
+    images: ["/images/hero/trophy.webp","/images/hero/award.webp","/images/hero/medal.webp"],
     featured: true,
     description:
       "Premium gold trophy suitable for schools, college and corporate award ceremonies.",
