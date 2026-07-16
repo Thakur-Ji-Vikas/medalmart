@@ -7,6 +7,7 @@ export type Product = {
   price: number;
   category: string;
   image: string;
+  images: string[];
   featured: boolean;
   description: string;
   

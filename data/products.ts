@@ -7,6 +7,7 @@ export const products: Product[] = [
     price: 899,
     category: "Trophies",
     image: "/images/hero/trophy.webp",
+    images: ["/images/hero/trophy.webp"],
     featured: true,
     description:
       "Premium gold trophy suitable for schools, college and corporate award ceremonies.",
@@ -34,6 +35,7 @@ export const products: Product[] = [
     price: 149,
     category: "Medals",
     image: "/images/hero/medal.webp",
+    images: ["/images/hero/medal.webp"],
     featured: true,
     description:
       "Premium champion medal suitable for schools, college and corporate award ceremonies.",
@@ -54,6 +56,7 @@ export const products: Product[] = [
     price: 699,
     category: "Shields",
     image: "/images/hero/award.webp",
+    images: [ "/images/hero/award.webp"],
     featured: true,
     description:
       "Premium wooden award shield suitable for schools, college and corporate award ceremonies.",
@@ -66,6 +69,7 @@ export const products: Product[] = [
     price: 1299,
     category: "Corporate Awards",
     image: "/images/hero/trophy1.webp",
+    images: ["/images/hero/trophy1.webp"],
     featured: false,
     description:
       "Premium crystal trophy suitable for schools, college and corporate award ceremonies.",
@@ -78,6 +82,7 @@ export const products: Product[] = [
     price: 199,
     category: "Medals",
     image: "/images/hero/trophy2.webp",
+    images: ["/images/hero/trophy2.webp"],
     featured: false,
     description:
       "Premium silver medal suitable for schools, college and corporate award ceremonies.",
@@ -90,6 +95,7 @@ export const products: Product[] = [
     price: 999,
     category: "Trophies",
     image: "/images/hero/trophy3.webp",
+    images: ["/images/hero/trophy3.webp"],
     featured: false,
     description:
       "Premium premium cup trophy suitable for schools, college and corporate award ceremonies.",
