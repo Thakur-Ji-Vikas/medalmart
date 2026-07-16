@@ -8,7 +8,24 @@ export const products: Product[] = [
     category: "Trophies",
     image: "/images/hero/trophy.webp",
     featured: true,
-    description: "Premium gold trophy suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium gold trophy suitable for schools, college and corporate award ceremonies.",
+    reviews: [
+      {
+        id: 1,
+        user: "Rahul",
+        rating: 5,
+        comment: "Excellent quality trophy.",
+        date: "2026-07-01",
+      },
+      {
+        id: 2,
+        user: "Priya",
+        rating: 4,
+        comment: "Very nice finishing.",
+        date: "2026-07-05",
+      },
+    ],
   },
   {
     id: 2,
@@ -18,7 +35,17 @@ export const products: Product[] = [
     category: "Medals",
     image: "/images/hero/medal.webp",
     featured: true,
-    description: "Premium champion medal suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium champion medal suitable for schools, college and corporate award ceremonies.",
+    reviews: [
+      {
+        id: 1,
+        user: "Ankit",
+        rating: 5,
+        comment: "Perfect medal for school events.",
+        date: "2026-07-03",
+      },
+    ],
   },
   {
     id: 3,
@@ -28,7 +55,9 @@ export const products: Product[] = [
     category: "Shields",
     image: "/images/hero/award.webp",
     featured: true,
-    description: "Premium wooden award shield suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium wooden award shield suitable for schools, college and corporate award ceremonies.",
+      reviews: [],
   },
   {
     id: 4,
@@ -38,7 +67,9 @@ export const products: Product[] = [
     category: "Corporate Awards",
     image: "/images/hero/trophy1.webp",
     featured: false,
-    description: "Premium crystal trophy suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium crystal trophy suitable for schools, college and corporate award ceremonies.",
+      reviews: [],
   },
   {
     id: 5,
@@ -48,7 +79,9 @@ export const products: Product[] = [
     category: "Medals",
     image: "/images/hero/trophy2.webp",
     featured: false,
-    description: "Premium silver medal suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium silver medal suitable for schools, college and corporate award ceremonies.",
+      reviews: [],
   },
   {
     id: 6,
@@ -58,6 +91,8 @@ export const products: Product[] = [
     category: "Trophies",
     image: "/images/hero/trophy3.webp",
     featured: false,
-    description: "Premium premium cup trophy suitable for schools, college and corporate award ceremonies."
+    description:
+      "Premium premium cup trophy suitable for schools, college and corporate award ceremonies.",
+      reviews: [],
   },
 ];
