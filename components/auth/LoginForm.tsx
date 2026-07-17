@@ -3,15 +3,25 @@
 import Link from "next/link";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login } = useAuth();
+
+  // Handle login
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    alert("Login API will be connected in Django backend.");
+    // Mock authenticated user
+    login({
+      name: "Vikas",
+      email,
+    });
+
+    alert("Login Successful!");
 
     setEmail("");
     setPassword("");
@@ -21,9 +31,7 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* Email */}
       <div>
-        <label className="mb-2 block font-medium">
-          Email
-        </label>
+        <label className="mb-2 block font-medium">Email</label>
 
         <input
           type="email"
@@ -37,9 +45,7 @@ export default function LoginForm() {
 
       {/* Password */}
       <div>
-        <label className="mb-2 block font-medium">
-          Password
-        </label>
+        <label className="mb-2 block font-medium">Password</label>
 
         <input
           type="password"
@@ -63,10 +69,7 @@ export default function LoginForm() {
           Forgot Password?
         </Link>
 
-        <Link
-          href="/register"
-          className="text-amber-600 hover:underline"
-        >
+        <Link href="/register" className="text-amber-600 hover:underline">
           Create Account
         </Link>
       </div>
