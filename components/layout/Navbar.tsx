@@ -11,7 +11,9 @@ export default function Navbar() {
   // const cart = [];
   const { cart } = useCart();
 
-  const { user } = useAuth();
+  // const { user, logout } = useAuth();
+
+  const { user , logout } = useAuth();
 
   // Get wishlist items
   const { wishlist } = useWishlist();
@@ -64,20 +66,39 @@ export default function Navbar() {
             <User className="hover:text-amber-500" />
           </button> */}
 
-          <Link href={user ? "/profile" : "/login"}>
 
-            {/* <User className="hover:text-amber-500" /> */}
-            
-            <div className="flex items-center gap-2">
-              <User className="hover:text-amber-500" />
+ {/* User */}
 
-              {user && (
-                <span className="hidden text-sm font-medium md:block">
-                  {user.name}
-                </span>
-              )}
-            </div>
-          </Link>
+{user ? (
+  <div className="flex items-center gap-3">
+
+    {/* Profile */}
+    <Link
+      href="/profile"
+      className="flex items-center gap-2"
+    >
+      <User className="hover:text-amber-500" />
+
+      <span className="hidden text-sm font-medium md:block">
+        {user.name}
+      </span>
+    </Link>
+
+    {/* Logout */}
+    <button
+      onClick={logout}
+      className="rounded-lg bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200"
+    >
+      Logout
+    </button>
+
+  </div>
+) : (
+  <Link href="/login">
+    <User className="hover:text-amber-500" />
+  </Link>
+)}
+
 
           {/* <button>
             <ShoppingCart className="hover:text-amber-500" />
