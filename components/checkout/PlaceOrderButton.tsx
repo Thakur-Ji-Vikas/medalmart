@@ -44,7 +44,7 @@ export default function PlaceOrderButton() {
     clearCart();
 
     // Redirect
-    router.push("/");
+    router.push("/order-success");
   }
 
   return (
