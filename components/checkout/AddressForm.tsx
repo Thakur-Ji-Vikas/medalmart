@@ -1,93 +1,89 @@
 "use client";
 
+import { ChangeEvent } from "react";
+import { useCheckout } from "@/hooks/useCheckout";
+
 export default function AddressForm() {
+
+  // Checkout state
+  const { checkout, updateCheckout } = useCheckout();
+
+  // Current address
+  const { address } = checkout;
+
+  // Handle input change
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    updateCheckout({
+      address: {
+        ...address,
+        [e.target.name]: e.target.value,
+      },
+    });
+  }
+
   return (
     <section className="rounded-2xl border bg-white p-6 shadow-sm">
 
-      {/* Section Title */}
-      <h2 className="mb-6 text-2xl font-bold">
-        Shipping Address
+      <h2 className="mb-6 text-2xl font-semibold">
+        Delivery Address
       </h2>
 
-      {/* Full Name */}
-      <div className="mb-4">
-        <label className="mb-2 block font-medium">
-          Full Name
-        </label>
+      <div className="grid gap-4">
 
+        {/* Full Name */}
         <input
-          type="text"
-          placeholder="Enter your full name"
-          className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
+          name="fullName"
+          value={address.fullName}
+          onChange={handleChange}
+          placeholder="Full Name"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
         />
-      </div>
 
-      {/* Phone Number */}
-      <div className="mb-4">
-        <label className="mb-2 block font-medium">
-          Phone Number
-        </label>
-
+        {/* Phone */}
         <input
-          type="tel"
-          placeholder="Enter your phone number"
-          className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
+          name="phone"
+          value={address.phone}
+          onChange={handleChange}
+          placeholder="Phone Number"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
         />
-      </div>
 
-      {/* Street Address */}
-      <div className="mb-4">
-        <label className="mb-2 block font-medium">
-          Street Address
-        </label>
-
-        <textarea
-          rows={4}
-          placeholder="House No., Street, Area..."
-          className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
-        />
-      </div>
-
-      {/* City & State */}
-      <div className="grid gap-4 md:grid-cols-2">
-
-        <div>
-          <label className="mb-2 block font-medium">
-            City
-          </label>
-
-          <input
-            type="text"
-            placeholder="City"
-            className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block font-medium">
-            State
-          </label>
-
-          <input
-            type="text"
-            placeholder="State"
-            className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
-          />
-        </div>
-
-      </div>
-
-      {/* Pincode */}
-      <div className="mt-4">
-        <label className="mb-2 block font-medium">
-          Pincode
-        </label>
-
+        {/* Address */}
         <input
-          type="text"
-          placeholder="Enter pincode"
-          className="w-full rounded-lg border px-4 py-3 outline-none focus:border-amber-500"
+          name="address"
+          value={address.address}
+          onChange={handleChange}
+          placeholder="Street Address"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
         />
+
+        {/* City */}
+        <input
+          name="city"
+          value={address.city}
+          onChange={handleChange}
+          placeholder="City"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        {/* State */}
+        <input
+          name="state"
+          value={address.state}
+          onChange={handleChange}
+          placeholder="State"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        {/* PIN Code */}
+        <input
+          name="pinCode"
+          value={address.pinCode}
+          onChange={handleChange}
+          placeholder="PIN Code"
+          className="rounded-lg border p-3 outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
       </div>
 
     </section>
