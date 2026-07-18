@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, useEffect, } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { CartItem } from "@/types/cart";
 import { Product } from "@/types/product";
 
@@ -14,6 +20,8 @@ type CartContextType = {
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
+  // Clear entire cart
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -22,19 +30,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   // Load cart once when app starts
   useEffect(() => {
-  const storedCart = localStorage.getItem("cart");
+    const storedCart = localStorage.getItem("cart");
 
-  if (storedCart) {
-    setCart(JSON.parse(storedCart));
-  }
-}, []);
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
 
- // Save cart whenever it changes
+  // Save cart whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-
 
   function addToCart(product: Product) {
     setCart((currentCart) => {
@@ -61,28 +67,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   }
 
-        function increaseQuantity(id: number) {
-        setCart((cart) =>
-          cart.map((item) =>
-            item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-          ),
-        );
-      }
+  function increaseQuantity(id: number) {
+    setCart((cart) =>
+      cart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
+  }
 
-      function decreaseQuantity(id: number) {
-        setCart((cart) =>
-          cart
-            .map((item) =>
-              item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
-            )
-            .filter((item) => item.quantity > 0),
-        );
-      }
+  function decreaseQuantity(id: number) {
+    setCart((cart) =>
+      cart
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  }
 
-      function removeFromCart(id: number) {
-        setCart((cart) => cart.filter((item) => item.id !== id));
-      }
+  function removeFromCart(id: number) {
+    setCart((cart) => cart.filter((item) => item.id !== id));
+  }
 
+  // Clear cart
+  function clearCart() {
+    setCart([]);
+  }
 
   return (
     <CartContext.Provider
@@ -96,6 +106,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
       }}
     >
       {children}

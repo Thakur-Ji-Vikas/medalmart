@@ -1,30 +1,58 @@
 "use client";
-import Button from "@/components/ui/Button";
+
+import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
+import { useCheckout } from "@/hooks/useCheckout";
 
 export default function PlaceOrderButton() {
-  // Access the current cart
-  const { cart } = useCart();
 
-  // Disable button if cart is empty
-  const isCartEmpty = cart.length === 0;
+  // Router
+  const router = useRouter();
+
+  // Cart
+  const { cart, clearCart } = useCart();
+
+  // Checkout
+  const { checkout } = useCheckout();
+
+  // Place order
+  function handlePlaceOrder() {
+
+    // Validate cart
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    // Validate address
+    if (
+      !checkout.address.fullName ||
+      !checkout.address.phone ||
+      !checkout.address.address ||
+      !checkout.address.city ||
+      !checkout.address.state ||
+      !checkout.address.pinCode
+    ) {
+      alert("Please complete the delivery address.");
+      return;
+    }
+
+    // Mock success
+    alert("Order placed successfully!");
+
+    // Empty cart
+    clearCart();
+
+    // Redirect
+    router.push("/");
+  }
 
   return (
-    <section className="mt-8">
-      {/* <button
-        disabled={isCartEmpty}
-        className={`w-full rounded-xl py-4 text-lg font-semibold transition
-          ${
-            isCartEmpty
-              ? "cursor-not-allowed bg-gray-300 text-gray-500"
-              : "bg-amber-600 text-white hover:bg-amber-700"
-          }`}
-      >
-        {isCartEmpty ? "Cart is Empty" : "Place Order"}
-      </button> */}
-      <Button disabled={isCartEmpty} className="w-full py-4 text-lg">
-        {isCartEmpty ? "Cart is Empty" : "Place Order"}
-      </Button>
-    </section>
+    <button
+      onClick={handlePlaceOrder}
+      className="mt-8 w-full rounded-xl bg-amber-600 py-4 font-semibold text-white hover:bg-amber-700"
+    >
+      Place Order
+    </button>
   );
 }
