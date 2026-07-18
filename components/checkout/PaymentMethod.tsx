@@ -1,94 +1,100 @@
 "use client";
 
+import { useCheckout } from "@/hooks/useCheckout";
+
 export default function PaymentMethod() {
+
+  // Checkout state
+  const { checkout, updateCheckout } = useCheckout();
+
   return (
     <section className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
 
-      {/* Section Heading */}
-      <h2 className="mb-6 text-2xl font-bold">
+      <h2 className="mb-6 text-2xl font-semibold">
         Payment Method
       </h2>
 
-      {/* Cash on Delivery */}
-      <label className="mb-4 flex cursor-pointer items-center gap-3 rounded-lg border p-4 hover:border-amber-500">
+      <div className="space-y-4">
 
-        <input
-          type="radio"
-          name="payment"
-          defaultChecked
-        />
+        {/* Cash on Delivery */}
+        <label className="flex cursor-pointer items-center gap-3">
 
-        <div>
-          <p className="font-semibold">
-            Cash on Delivery
-          </p>
+          <input
+            type="radio"
+            name="payment"
+            checked={checkout.paymentMethod === "cod"}
+            onChange={() =>
+              updateCheckout({
+                paymentMethod: "cod",
+              })
+            }
+          />
 
-          <p className="text-sm text-gray-500">
-            Pay when your order is delivered.
-          </p>
-        </div>
+          <div>
+            <p className="font-medium">
+              Cash on Delivery
+            </p>
 
-      </label>
+            <p className="text-sm text-gray-500">
+              Pay when your order arrives.
+            </p>
+          </div>
 
-      {/* UPI */}
-      <label className="mb-4 flex cursor-pointer items-center gap-3 rounded-lg border p-4 hover:border-amber-500">
+        </label>
 
-        <input
-          type="radio"
-          name="payment"
-        />
+        {/* UPI */}
+        <label className="flex cursor-pointer items-center gap-3">
 
-        <div>
-          <p className="font-semibold">
-            UPI
-          </p>
+          <input
+            type="radio"
+            name="payment"
+            checked={checkout.paymentMethod === "upi"}
+            onChange={() =>
+              updateCheckout({
+                paymentMethod: "upi",
+              })
+            }
+          />
 
-          <p className="text-sm text-gray-500">
-            Google Pay, PhonePe, Paytm and more.
-          </p>
-        </div>
+          <div>
+            <p className="font-medium">
+              UPI
+            </p>
 
-      </label>
+            <p className="text-sm text-gray-500">
+              Pay using any UPI app.
+            </p>
+          </div>
 
-      {/* Card */}
-      <label className="mb-4 flex cursor-pointer items-center gap-3 rounded-lg border p-4 hover:border-amber-500">
+        </label>
 
-        <input
-          type="radio"
-          name="payment"
-        />
+        {/* Credit / Debit Card */}
+        <label className="flex cursor-pointer items-center gap-3">
 
-        <div>
-          <p className="font-semibold">
-            Credit / Debit Card
-          </p>
+          <input
+            type="radio"
+            name="payment"
+            checked={checkout.paymentMethod === "card"}
+            onChange={() =>
+              updateCheckout({
+                paymentMethod: "card",
+              })
+            }
+          />
 
-          <p className="text-sm text-gray-500">
-            Visa, MasterCard, RuPay.
-          </p>
-        </div>
+          <div>
+            <p className="font-medium">
+              Credit / Debit Card
+            </p>
 
-      </label>
+            <p className="text-sm text-gray-500">
+              Visa, Mastercard, RuPay and more.
+            </p>
+          </div>
 
-      {/* Net Banking */}
-      <label className="flex cursor-pointer items-center gap-3 rounded-lg border p-4 hover:border-amber-500">
+        </label>
 
-        <input
-          type="radio"
-          name="payment"
-        />
-
-        <div>
-          <p className="font-semibold">
-            Net Banking
-          </p>
-
-          <p className="text-sm text-gray-500">
-            Pay directly from your bank account.
-          </p>
-        </div>
-
-      </label>
+      </div>
 
     </section>
   );
