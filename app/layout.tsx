@@ -8,6 +8,7 @@ import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { CheckoutProvider } from "@/context/CheckoutContext";
 import { OrderProvider } from "@/context/OrderContext";
+import { SearchProvider } from "@/context/SearchContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,9 +41,11 @@ export default function RootLayout({
             <WishlistProvider>
               <CheckoutProvider>
                 <OrderProvider>
-                  <Navbar />
-                  <main>{children}</main>
-                  {/* <Footer /> */}
+                  <SearchProvider>
+                    <Navbar />
+                    <main>{children}</main>
+                    {/* <Footer /> */}
+                  </SearchProvider>
                 </OrderProvider>
               </CheckoutProvider>
             </WishlistProvider>
