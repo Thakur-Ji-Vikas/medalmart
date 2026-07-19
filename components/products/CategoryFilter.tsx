@@ -1,9 +1,6 @@
 "use client";
 
-type Props = {
-  category: string;
-  setCategory: (value: string) => void;
-};
+import { useSearch } from "@/hooks/useSearch";
 
 const categories = [
   "All",
@@ -13,14 +10,18 @@ const categories = [
   "Corporate Awards",
 ];
 
-export default function CategoryFilter({
-  category,
-  setCategory,
-}: Props) {
+export default function CategoryFilter() {
+  // Search state
+  const { filters, updateFilters } = useSearch();
+
   return (
     <select
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}
+      value={filters.category}
+      onChange={(e) =>
+        updateFilters({
+          category: e.target.value,
+        })
+      }
       className="rounded-xl border p-3"
     >
       {categories.map((item) => (

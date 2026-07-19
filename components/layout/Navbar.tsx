@@ -6,14 +6,18 @@ import Link from "next/link";
 import { Search, ShoppingCart, User, Trophy } from "lucide-react";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { useAuth } from "@/hooks/useAuth";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function Navbar() {
   // const cart = [];
   const { cart } = useCart();
 
+  // Search state
+  const { filters, updateFilters } = useSearch();
+
   // const { user, logout } = useAuth();
 
-  const { user , logout } = useAuth();
+  const { user, logout } = useAuth();
 
   // Get wishlist items
   const { wishlist } = useWishlist();
@@ -56,7 +60,13 @@ export default function Navbar() {
           <input
             type="text"
             placeholder="Search trophies, medals..."
-            className="outline-none ml-2 w-full"
+            value={filters.search}
+            onChange={(e) =>
+              updateFilters({
+                search: e.target.value,
+              })
+            }
+            className="ml-2 w-full outline-none"
           />
         </div>
 
@@ -66,39 +76,32 @@ export default function Navbar() {
             <User className="hover:text-amber-500" />
           </button> */}
 
+          {/* User */}
 
- {/* User */}
+          {user ? (
+            <div className="flex items-center gap-3">
+              {/* Profile */}
+              <Link href="/profile" className="flex items-center gap-2">
+                <User className="hover:text-amber-500" />
 
-{user ? (
-  <div className="flex items-center gap-3">
+                <span className="hidden text-sm font-medium md:block">
+                  {user.name}
+                </span>
+              </Link>
 
-    {/* Profile */}
-    <Link
-      href="/profile"
-      className="flex items-center gap-2"
-    >
-      <User className="hover:text-amber-500" />
-
-      <span className="hidden text-sm font-medium md:block">
-        {user.name}
-      </span>
-    </Link>
-
-    {/* Logout */}
-    <button
-      onClick={logout}
-      className="rounded-lg bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200"
-    >
-      Logout
-    </button>
-
-  </div>
-) : (
-  <Link href="/login">
-    <User className="hover:text-amber-500" />
-  </Link>
-)}
-
+              {/* Logout */}
+              <button
+                onClick={logout}
+                className="rounded-lg bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link href="/login">
+              <User className="hover:text-amber-500" />
+            </Link>
+          )}
 
           {/* <button>
             <ShoppingCart className="hover:text-amber-500" />

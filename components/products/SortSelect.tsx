@@ -1,18 +1,19 @@
 "use client";
 
-type SortSelectProps = {
-  sort: string;
-  setSort: (value: string) => void;
-};
+import { useSearch } from "@/hooks/useSearch";
 
-export default function SortSelect({
-  sort,
-  setSort,
-}: SortSelectProps) {
+export default function SortSelect() {
+  // Search state
+  const { filters, updateFilters } = useSearch();
+
   return (
     <select
-      value={sort}
-      onChange={(e) => setSort(e.target.value)}
+      value={filters.sort}
+      onChange={(e) =>
+        updateFilters({
+          sort: e.target.value,
+        })
+      }
       className="rounded-xl border p-3"
     >
       <option value="default">Default</option>

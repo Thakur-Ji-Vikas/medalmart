@@ -1,22 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
+// import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import SortSelect from "@/components/products/SortSelect";
 import ProductHeader from "@/components/products/ProductHeader";
 import ProductGrid from "@/components/products/ProductGrid";
 import SearchBar from "@/components/products/SearchBar";
 import CategoryFilter from "@/components/products/CategoryFilter";
-
+import { useSearch } from "@/hooks/useSearch";
 import { products } from "@/data/products";
 
 export default function ProductsPage() {
   // Search text
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
   // Selected category
-  const [category, setCategory] = useState("All");
+  // const [category, setCategory] = useState("All");
   // Current sorting option
-  const [sort, setSort] = useState("default");
+  // const [sort, setSort] = useState("default");
+
+  // Search filters
+  const { filters, updateFilters } = useSearch();
+
+  const { search, category, sort } = filters;
 
   // // Filter products
   // const filteredProducts = useMemo(() => {
@@ -71,20 +77,22 @@ export default function ProductsPage() {
       {/* Filters */}
 
       <div className="my-8 grid gap-4 md:grid-cols-3">
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar />
 
-        <CategoryFilter category={category} setCategory={setCategory} />
-        <SortSelect sort={sort} setSort={setSort} />
+        <CategoryFilter />
+        <SortSelect />
       </div>
 
       {/* Clear filter */}
       <div className="mt-4">
         <button
-          onClick={() => {
-            setSearch("");
-            setCategory("All");
-            setSort("default");
-          }}
+          onClick={() =>
+            updateFilters({
+              search: "",
+              category: "All",
+              sort: "default",
+            })
+          }
           className="rounded-xl border px-5 py-2 transition hover:bg-gray-100"
         >
           Clear Filters

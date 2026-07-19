@@ -1,20 +1,21 @@
 "use client";
 
-type SearchBarProps = {
-  search: string;
-  setSearch: (value: string) => void;
-};
+import { useSearch } from "@/hooks/useSearch";
 
-export default function SearchBar({
-  search,
-  setSearch,
-}: SearchBarProps) {
+export default function SearchBar() {
+  // Search state
+  const { filters, updateFilters } = useSearch();
+
   return (
     <input
       type="text"
       placeholder="Search products..."
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
+      value={filters.search}
+      onChange={(e) =>
+        updateFilters({
+          search: e.target.value,
+        })
+      }
       className="w-full rounded-xl border p-3 outline-none focus:border-amber-500"
     />
   );
