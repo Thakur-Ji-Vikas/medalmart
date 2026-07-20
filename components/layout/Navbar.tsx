@@ -7,8 +7,13 @@ import { Search, ShoppingCart, User, Trophy } from "lucide-react";
 import { BRAND, NAV_LINKS } from "@/lib/constants";
 import { useAuth } from "@/hooks/useAuth";
 import { useSearch } from "@/hooks/useSearch";
+import { Menu } from "lucide-react";
+import { useState } from "react";
+import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // const cart = [];
   const { cart } = useCart();
 
@@ -72,6 +77,10 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
+          <button onClick={() => setMobileMenuOpen(true)} className="lg:hidden">
+            <Menu size={26} />
+          </button>
+
           {/* <button>
             <User className="hover:text-amber-500" />
           </button> */}
@@ -132,6 +141,10 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+      <MobileMenu
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
     </header>
   );
 }
