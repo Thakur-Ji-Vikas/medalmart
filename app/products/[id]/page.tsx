@@ -54,7 +54,7 @@ export default async function ProductDetails({ params }: Props) {
     <main className="max-w-6xl mx-auto px-6 py-12">
       <div className="grid md:grid-cols-2 gap-12">
         
-        <ProductGallery images={product.images} productName={product.name} />
+        <ProductGallery images={product.images} name={product.name} />
 
         <div>
           <h1 className="text-4xl font-bold">{product.name}</h1>
