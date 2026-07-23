@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const wishlisted = isWishlisted(id);
 
   return (
-    <div className="rounded-2xl border shadow-sm overflow-hidden hover:shadow-lg transition">
+    <div className="rounded-2xl border bg-white shadow-sm transition hover:shadow-lg">
       <Link href={`/products/${id}`}>
         <div className="relative h-72 bg-white">
           {/* Wishlist Button */}

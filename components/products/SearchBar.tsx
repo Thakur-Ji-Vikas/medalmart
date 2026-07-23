@@ -16,7 +16,7 @@ export default function SearchBar() {
           search: e.target.value,
         })
       }
-      className="w-full rounded-xl border p-3 outline-none focus:border-amber-500"
+      className="w-full rounded-xl border p-3 outline-none transition focus:border-amber-500"
     />
   );
 }
